@@ -5,22 +5,32 @@
 const express = require("express")
 const cors = require("cors");
 const app = express();
-const server = require("http").createServer(app);
+const httpServer = require("http").createServer(app);
 const WebSocket = require("ws");
 const ChildProcess = require("child_process");
 
-const wss = new WebSocket.Server({ server });
+let wss = new WebSocket.Server({ server: httpServer });
+let nextClientId = 0;
+let connectedClients = {};
 
 app.use(cors());
 
-const checkDisconnectedConnections = setInterval(function ping()
+const endTerminalInput = (clientId) =>
+{
+    if (connectedClients[clientId] != null && connectedClients[clientId].terminalInstance != null)
+    {
+        connectedClients[clientId].terminalInstance.stdin.end();
+    }
+}
+
+const checkDisconnectedConnections = setInterval(() =>
 {
     wss.clients.forEach(ws =>
     {
         if (!ws.isAlive)
         {
             ws.terminate();
-            delete connectedClients[ws.id];
+            endTerminalInput();
 
             return;
         }
@@ -30,13 +40,8 @@ const checkDisconnectedConnections = setInterval(function ping()
     });
 }, 30000);
 
-let nextClientId = 0;
-let connectedClients = {};
-
 wss.on("connection", (ws) =>
 {
-    console.log("New websocket connection");
-
     ws.id = nextClientId++;
     ws.isAlive = true;
 
@@ -70,6 +75,7 @@ wss.on("connection", (ws) =>
         }
 
         ws.send(JSON.stringify(data));
+        endTerminalInput(ws.id);
 	});
 
     ws.on("pong", () =>
@@ -89,7 +95,7 @@ wss.on("connection", (ws) =>
         switch (receivedData.command)
         {
             case "enter_input":
-                if (connectedClients[ws.id] !== null)
+                if (connectedClients[ws.id] !== null && connectedClients[ws.id].terminalInstance.stdin.writable)
                 {
             	    connectedClients[ws.id].terminalInstance.stdin.write(`${receivedData.args[0]}\n`);
                 }
@@ -97,8 +103,9 @@ wss.on("connection", (ws) =>
         }
     });
 
-    ws.on("close", (event) =>
+    ws.on("close", () =>
     {
+        endTerminalInput(ws.id);
         delete connectedClients[ws.id];
 
         if (Object.keys(connectedClients).length === 0)
@@ -113,7 +120,4 @@ wss.on("close", () =>
     clearInterval(checkDisconnectedConnections);
 })
 
-server.listen(3000, () =>
-{
-    console.log("Server started");
-});
+httpServer.listen(3000);
