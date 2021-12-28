@@ -1,0 +1,26 @@
+{
+  "name": "fifteen-puzzle-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "ws": "^8.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarianBenam/fifteen-puzzle-server.git"
+  },
+  "author": "Darian Benam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarianBenam/fifteen-puzzle-server/issues"
+  },
+  "homepage": "https://github.com/DarianBenam/fifteen-puzzle-server"
+}
