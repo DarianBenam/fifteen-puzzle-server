@@ -106,6 +106,10 @@ body {
     width: 100%;
 }
 
+.landing-page-footer {
+    padding: 48px 0 96px 0;
+}
+
 @media only screen and (min-width: 768px) {
     .landing-page-header__cta-container {
         flex-direction: row;
