@@ -1,4 +1,4 @@
-// File Name:        main.js
+// File Name:        app.js
 // By:               Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date Created:     Monday, December 27, 2021
 
