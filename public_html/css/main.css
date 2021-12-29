@@ -1,0 +1,118 @@
+/* File Name:        main.css
+ * By:               Darian Benam (GitHub: https://github.com/BeardedFish/)
+ * Date Created:     Wednesday, December 29, 2021 */
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(to bottom right, #0074cc, #00457a) fixed;
+    font-family: "IBM Plex Sans", "Segoe UI", "Arial", sans-serif;
+    font-size: 100%;
+    margin: 0;
+    min-width: 288px;
+}
+
+.content-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 24px;
+    overflow: visible;
+    text-align: center;
+}
+
+.landing-page-header {
+    padding: 96px 0;
+}
+
+.landing-page-header h1, .landing-page-header h2 {
+    color: #fff;
+}
+
+.landing-page-header h1 {
+    font-size: 5em;
+    margin: 0 0 8px 0;
+}
+
+.landing-page-header h2 {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 0 0 48px 0;
+    max-width: 768px;
+}
+
+.landing-page-header__cta-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 96px;
+}
+
+.landing-page-header__cta-container > a:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+.button {
+    border-style: solid;
+    border-width: 2px;
+    color: #fff;
+    display: inline-block;
+    font-weight: 700;
+    padding: 24px 48px;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.button__green {
+    background-color: #289d4b;
+    border-color: #289d4b;
+}
+
+.button__green:hover {
+    border-color: #fff;
+}
+
+.button__green:focus {
+    background-color: #0f8432;
+    border-color: #fff;
+}
+
+.button__white-outline {
+    background-color: transparent;
+    border-color: #fff;
+}
+
+.button__white-outline:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+
+.button__white-outline:focus {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+
+.landing-page-header__game-screenshot img {
+    display: block;
+    box-shadow: 0 0 24px rgba(12, 12, 12, 0.8);
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .landing-page-header__cta-container {
+        flex-direction: row;
+    }
+
+    .landing-page-header__cta-container > a:not(:last-child) {
+        margin-bottom: 0;
+        margin-right: 16px;
+    }
+}

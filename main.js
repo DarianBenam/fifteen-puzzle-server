@@ -2,7 +2,7 @@
 // By:               Darian Benam (GitHub: https://github.com/BeardedFish/)
 // Date Created:     Monday, December 27, 2021
 
-const express = require("express")
+const express = require("express");
 const cors = require("cors");
 const app = express();
 const httpServer = require("http").createServer(app);
@@ -13,6 +13,7 @@ let wss = new WebSocket.Server({ server: httpServer });
 let nextClientId = 0;
 let connectedClients = {};
 
+app.use(express.static(__dirname + "/public_html"));
 app.use(cors());
 
 const endTerminalInput = (clientId) =>
